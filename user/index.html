@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppMusic</title>
+    <meta name="description" content="" />
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <!-- build:css ../css/main.min.css -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <!-- endbuild -->
+    <script src="../js/global.js" defer></script>
+    <script src="../js/get-user.js" defer></script>
+    <script src="../js/set-vh.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/player.js" defer></script>
+    <script src="../js/user.js" defer></script>
+  </head>
+  <body>
+    <div id="PANEL__ADMIN" style="background-color: lightblue; height: 60px; width: 100%; display: flex; justify-content: end; align-items: center;">
+      
+      <button onclick="cerrarSesion()"
+          class="form__button"
+          style="line-height:normal; margin: 0px; margin-right: 20px; width: auto; height: 40px; background-color: #FFBB50; color: #EC4B5F;"
+          id="btnCreateList">Cerrar sesión</button>
+    </div>
+    <!-- user -->
+    <div class="wrapper">
+      <div class="container fluid">
+        <div class="row py-0">
+          <div class="col-xs-12 col-md-8 no-gutter">
+            <main>
+              <!-- profile -->
+              <section class="section profile no-gutter">
+                <div class="profile__container">
+                  <div class="profile__img">
+                    <img
+                      id="profileImg"
+                      src="https://thumbs.dreamstime.com/b/vector-de-usuario-redes-sociales-perfil-avatar-predeterminado-retrato-vectorial-del-176194876.jpg"
+                    />
+                  </div>
+                  <div class="profile__info">
+                    <span class="profile__name" id="profileName"></span>
+                    <span class="profile__bio" id="profileBio"></span>
+                    <div style="margin-top: 20px;" class="form__group">
+                      <button
+                        class="form__button form__button--submit"
+                        id="btnEditProfile"
+                      >
+                        Editar
+                      </button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </section>
+              <section class="subbody">
+                <div class="player">
+                  <audio id="player" ontimeupdate="updateProgress();">
+                    <source  id="source">	
+                    Audio no soportado	
+                  </audio>
+                  
+                  <div id="controls">
+                    <div class="timer" id="timer">
+                      &nbsp;
+                    </div>
+                    <div class="volumen">
+                      Vol: 
+                      <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4578a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></i> 
+                      <input type="range" name="volumen" id="volumen" min="0" max="1" step="0.01" value="0.75"> 
+                      <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4578a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></i>
+                    </div>
+                    
+                    <i onclick="prevMusic();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4578a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 19 2 12 11 5 11 19"></polygon><polygon points="22 19 13 12 22 5 22 19"></polygon></svg></i>
+                    <i onclick="togglePlay();" id="iconPlay"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4578a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></i> 
+                    <i onclick="nextMusic();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4578a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg></i>
+                    <br>
+                    <span id="currentPlay"></span><br>
+                    <progress id="progress" value="0" max="100" ></progress>
+                    <h3 class="h33">Mi música</h3>
+                    <div id="playList"></div>
+                    <div style="position: relative; bottom: 30px; right: 10px; color: #224891; float: right;">
+                      <div style="display: flex; flex-direction: column;">
+                        <strong id="USER__NAME" style="cursor: pointer;" onclick="viewProfile()"></strong>
+                        <strong id="LIST__NAME" style="cursor: pointer;"></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="section filter no-gutter">
+                <div class="filter__container">
+                  <div class="filter__search">
+                    <div class="form">
+                      <div style="width: 100%; display: flex; flex-direction: row;">
+                        <div class="form__group" style="width: 170%;">
+                          <label>
+                            <input type="text" id="inputSearch" placeholder="Buscar..." />
+                          </label>
+                        </div>
+                        <button
+                          class="form__button form__button--submit"
+                          id="btnSearch"
+                        >
+                          Buscar
+                        </button>
+                      </div>
+                      <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-around;">
+                        <div style="display: flex; align-self: start;">
+                          <input style="width: auto; min-width: auto;" type="checkbox" aria-label="all" id="checkboxAll" />
+                          <label> Todas </label>
+                        </div>
+                        <div style="display: flex; align-self: start;">
+                          <input style="width: auto; min-width: auto;" type="checkbox" aria-label="title" id="checkboxTitle" />
+                          <label> titulo </label>
+                        </div>
+                        <div style="display: flex; align-self: start;">
+                          <input style="width: auto; min-width: auto;" type="checkbox" aria-label="album"  id="checkboxAlbum" />
+                          <label> album </label>
+                        </div>
+                        <div style="display: flex; align-self: start;">
+                          <input style="width: auto; min-width: auto;" type="checkbox" aria-label="group"  id="checkboxGroup" />
+                          <label> grupo </label>
+                        </div>
+                        <div style="display: flex; align-self: start;">
+                          <input style="width: auto; min-width: auto;" type="checkbox" aria-label="name"  id="checkboxList" />
+                          <label> lista </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter__options"></div>
+                  <div class="filter__content">
+                    <h3 class="list__title">Todas las canciones/listas:</h3>
+                    <ul class="list list--filter" id="allList"></ul>
+                  </div>
+                </div>
+              </section>
+            </main>
+          </div>
+          <!-- sidebar -->
+          <div class="col-xs-12 col-md-4 no-gutter">
+            <aside class="sidebar section">
+              <div class="sidebar__container">
+                <div class="list__title" style=" display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                  <h3>Favoritos:</h3>
+                  <button onclick="reproducirListFav()" class="form__button" style="line-height:normal; margin: 0px; width: auto;" id="btnCreateList">Reproducir lista</button>
+                </div>
+                <ul class="list list--sidebar" id="favList"></ul>
+                <div class="list__title" style=" display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                  <h3>Mis listas:</h3>
+                  <button onclick="createListOwn()" class="form__button" style="line-height:normal; margin: 0px; width: auto;" id="btnCreateList">Crear lista</button>
+                </div>
+                <ul class="list list--sidebar" id="myList"></ul>
+                <h3 class="list__title">Otras listas:</h3>
+                <ul class="list list--sidebar" id="otherList"></ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="snackbar"></div>
+    
+  </body>
+</html>

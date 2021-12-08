@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppMusic</title>
+    <meta name="description" content="" />
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+    <!-- build:css ../css/main.min.css -->
+    <link rel="stylesheet" href="../../css/main.css" />
+    <!-- endbuild -->
+    <script src="../../js/global.js" defer></script>
+    <script src="../../js/get-edit-user.js" defer></script>
+    <script src="../../js/set-vh.js" defer></script>
+    <script src="../../js/menu.js" defer></script>
+    <script src="../../js/edit-user.js" defer></script>
+  </head>
+  <body>
+    <div style="background-color: lightblue; height: 60px; width: 100%; display: flex; justify-content: end; align-items: center;">
+      <button onclick="backView()"
+        class="form__button"
+        style="line-height:normal; margin: 0px; margin-right: 20px; width: auto; height: 40px; background-color: #FFBB50; color: #EC4B5F;"
+        id="btnCreateList">Mi Perfil</button>
+      <button onclick="cerrarSesion()"
+        class="form__button"
+        style="line-height:normal; margin: 0px; margin-right: 20px; width: auto; height: 40px; background-color: #FFBB50; color: #EC4B5F;"
+        id="btnCreateList">Cerrar sesión</button>
+    </div>
+    <!-- user -->
+    <div class="wrapper">
+      <div class="container fluid">
+        <div class="row py-0" style="justify-content: center;">
+          <div class="col-xs-12 col-md-8 no-gutter">
+            <main>
+              <!-- profile -->
+              <section class="section profile no-gutter">
+                <div style="display: flex; flex-direction: column; width: 100%;">
+                  <div class="profile__info">
+                    <div class="profile__img" style="align-self: center;">
+                      <img
+                        id="profileImg"
+                        src="https://thumbs.dreamstime.com/b/vector-de-usuario-redes-sociales-perfil-avatar-predeterminado-retrato-vectorial-del-176194876.jpg"
+                      />
+                      <input id="file" type="file" accept="image/*" style="width: 0px; height: 0px;"/>
+                    </div>
+                    
+                    <div class="form">
+                      <div class="form__group">
+                        <label>
+                          <input type="text" id="profileName" placeholder="Nombre de usuario" />
+                        </label>
+                      </div>
+                      <div class="form__group">
+                        <label>
+                          <textarea type="text" id="profileBio" placeholder="Bio del usuario" ></textarea>
+                        </label>
+                      </div>
+                      <div class="form__group">
+                        <button
+                          class="form__button form__button--submit"
+                          id="btnSaveChange"
+                          type="submit"
+                        >
+                          Guardar cambios
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </section>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
